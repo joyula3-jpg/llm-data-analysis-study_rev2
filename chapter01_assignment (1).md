@@ -68,6 +68,7 @@ payment별로 고객 성향을 유추할 수 있음
 ### Evidence
 
 ![STEP 1 질문 구체화 결과](images/step01_question.png)
+<img width="739" height="653" alt="image" src="https://github.com/user-attachments/assets/f2b32628-4867-4cc0-9597-40e9f1c1f1d8" />
 
 ---
 
