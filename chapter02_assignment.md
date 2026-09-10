@@ -4,16 +4,16 @@
 
 ## 0. 제출 정보
 
-- 이름:
-- GitHub ID:
+- 이름: 조유라 
+- GitHub ID: joyula3-jpg
 - 개인 저장소: `llm-data-analysis-study`
-- 작성일:
-- 운영체제:
+- 작성일:9월 10일
+- 운영체제: jupyter notebook & visual studio
 
 ### 최종 제출 URL
 
 ```text
-https://github.com/<GitHub-ID>/llm-data-analysis-study/blob/main/chapter02/chapter02.md
+https://github.com/joyula3-jpg/llm-data-analysis-study_rev2/edit/main/chapter02_assignment.md
 ```
 
 ---
@@ -30,28 +30,32 @@ git --version
 ### 실행 결과
 
 ```text
-여기에 실제 결과를 작성하세요.
+3.13.9
 ```
 
 ### Evidence
 
 ![Python과 Git 버전](images/step01_versions.png)
+<img width="782" height="94" alt="image" src="https://github.com/user-attachments/assets/2be3584f-e6e6-45ce-bc78-a9699e8a14d4" />
+
 
 ### 결과 관찰
 
-버전과 실행 가능 여부를 사실 위주로 작성하세요.
+jupyter notebook에서 실행 결과 3.13.9로 확인되었습니다. 
 
 ### 나의 해석과 판단
 
-현재 환경이 수업 실습에 적합한지 판단하고 이유를 작성하세요.
+적합하다고 생각합니다. 교수님께서 보여주신 강의에서도 확인하였습니다. 
 
 ### 업무·분석적 의미
 
-프로젝트 시작 전에 버전과 도구 상태를 확인하는 이유를 작성하세요.
+신규 버전은 최신 기술이지만 안정성에서 떨어질 수 있고
+버전마다 필요한 library 별 버전이 맞을수도 맞지 않을수도 있다. 
+그렇기 때문에 최초에 python 버전을 미리 확인하고 그에 맞는 부분을 선택적 설치해야 한다. 
 
 ### 한계와 추가 확인 사항
 
-아직 확인하지 못한 항목을 작성하세요.
+없습니다. 
 
 ---
 
@@ -59,40 +63,50 @@ git --version
 
 ### 수행 내용
 
-- [ ] 공식 Public 저장소 clone
-- [ ] 프로젝트 루트 확인
-- [ ] `.venv` 생성
-- [ ] `.venv` 활성화
-- [ ] `requirements.txt` 설치
+- [ o ] 공식 Public 저장소 clone
+- [ o ] 프로젝트 루트 확인
+- [ o ] `.venv` 생성
+- [ o ] `.venv` 활성화
+- [ o ] `requirements.txt` 설치
 
 ### 핵심 실행 결과
 
 ```text
-현재 프로젝트 경로:
-터미널 Python 실행 파일:
-가상환경 활성화 여부:
-패키지 설치 결과:
+현재 프로젝트 경로: LLM-Lecture - .venv
+터미널 Python 실행 파일: -
+가상환경 활성화 여부: 확인
+패키지 설치 결과: 확인
 ```
 
 ### Evidence
 
 ![가상환경과 Python 경로](images/step02_venv.png)
+<img width="1365" height="925" alt="image" src="https://github.com/user-attachments/assets/4d0f0237-8c9c-42ed-bedc-6e18e55da98f" />
+
 
 ### 결과 관찰
 
 현재 `python`이 어떤 실행 파일을 가리키는지 작성하세요.
+: 
+<img width="531" height="43" alt="image" src="https://github.com/user-attachments/assets/92aad701-bc22-433c-a731-0a2de11aeb3b" />
+: /Users/hyeontan-o/LLM_Lecture/.venv/bin/python
+
 
 ### 나의 해석과 판단
 
 시스템 Python과 프로젝트 `.venv`를 분리하는 것이 왜 필요한지 자신의 말로 작성하세요.
+: 시스템 - library 간 버전 충돌을 막기 위해서 
+  안정성이 확보되고, 해당 python 버전의 맞는 library를 설치해야 공용 공간의 피해를 막을 수 있기 때문 
 
 ### 업무·분석적 의미
 
 다른 사람이 같은 프로젝트를 재실행할 때 가상환경이 주는 이점을 작성하세요.
+: 어디서나 재현이 가능하다. 
 
 ### 한계와 추가 확인 사항
 
-회사/기관 PC 정책, Python 버전 차이 등 현재 환경의 제약을 작성하세요.
+회사/기관 PC 정책, Python 버전 차이 등 현재 환경의 제약을 작성하세요. 
+: 회사pc에서는 낮은 버전의 python을 설치하는 것으로 권장하고 있음 
 
 ---
 
