@@ -115,30 +115,37 @@ jupyter notebook에서 실행 결과 3.13.9로 확인되었습니다.
 ### 확인 결과
 
 ```text
-VS Code Python 인터프리터:
-Notebook sys.executable:
-Notebook Path.cwd():
+VS Code Python 인터프리터: .venv 
+Notebook sys.executable: opt/anaconda3/bin/python
+Notebook Path.cwd(): /Users/hyeontan-o/LLM_Lecture/chapter02
 ```
 
 ### Evidence
 
 ![VS Code 인터프리터와 Notebook 커널](images/step03_kernel.png)
+<img width="737" height="245" alt="image" src="https://github.com/user-attachments/assets/5f11dd0a-5205-4e76-beaa-3ddcbda07a69" />
+
 
 ### 결과 관찰
 
 터미널 Python과 Notebook Python이 같은 `.venv`인지 작성하세요.
+네 같은 .venv 입니다. 
 
 ### 나의 해석과 판단
 
 둘이 다를 경우 어떤 문제가 발생할 수 있는지 작성하세요.
+버전이 다르기 때문에 구현된 코드가 실행이 안되는 케이스가 발생할 수 있습니다. 
 
 ### 업무·분석적 의미
 
 `ModuleNotFoundError` 같은 환경 오류를 줄이는 데 어떤 도움이 되는지 작성하세요.
+질문의 의미를 모르겠습니다. 
 
 ### 한계와 추가 확인 사항
 
 커널 이름만 보고 판단하면 안 되는 이유 등 추가 확인 사항을 작성하세요.
+질문의 의미를 모르겠습니다. 
+확실하게 가상환경까지 타고 들어가는 것이 필요합니다. 
 
 ---
 
@@ -147,42 +154,53 @@ Notebook Path.cwd():
 ### 확인 결과
 
 ```text
-DATA_DIR 존재 여부:
-customers.csv 존재 여부:
-customers.shape:
-주요 컬럼:
+DATA_DIR 존재 여부: 확인하였습니다. 
+customers.csv 존재 여부: 확인하였습니다. 
+customers.shape: 150행, 6열
+주요 컬럼: customer_id, name, age
 ```
 
 ### Evidence
 
 ![customers 데이터 정상 로드](images/step04_customers.png)
+<img width="592" height="354" alt="image" src="https://github.com/user-attachments/assets/479b7f64-b5ad-43a4-b24c-43ddfd1e3bbe" />
+<img width="609" height="405" alt="image" src="https://github.com/user-attachments/assets/66e2edaa-97e2-40dc-8271-a3835be30e84" />
+
 
 ### 결과 관찰
 
 `customers.head()`, shape, 컬럼 결과에서 직접 확인한 사실을 작성하세요.
+총 6개의 열이 있으며 
+수치형, 범주형이 골고루 섞여 있음 
+총 150개의 정보를 확인할 수 있음 
 
 ### 나의 해석과 판단
 
 이 단계까지 성공했다면 어떤 구성 요소가 정상 연결되었다고 판단할 수 있는지 작성하세요.
+네 잘 연결되고 데이터도 read할 수 있습니다. 
 
 ### 업무·분석적 의미
 
 분석 전에 최소 스모크 테스트를 하는 이유를 작성하세요.
+- 전체 데이터를 다 밀어넣기 전에, 극소량의 데이터나 더미 데이터를 활용하여 코드 전체의 에러 발생 여부를 확인하며
+- 시간과 비용을 절감하기 위해서 진행함 
 
 ### 한계와 추가 확인 사항
 
 현재는 환경 연결만 확인했으며 데이터 품질은 아직 검증하지 않았다는 점을 작성하세요.
+- 아직 품질 검증(결측치 여부, 있을 경우 보강 방법)에 대해서는 생각하지 않았습니다. 
 
 ---
 
 ## 5. 오류 해결 기록
 
 실습 중 오류가 있었다면 작성합니다. 오류가 없었다면 `해당 없음`이라고 적습니다.
+- 해당 없음 
 
 ### 오류 메시지
 
 ```text
-민감정보를 제거한 실제 오류
+ 없습니다. 
 ```
 
 ### 원인 후보
@@ -219,10 +237,10 @@ customers.shape:
 
 ## 6. Secret 보호 확인
 
-- [ ] `.env`는 Git 추적 대상이 아닙니다.
-- [ ] 실제 API Key를 코드에 작성하지 않았습니다.
-- [ ] 캡처 화면에 Token/비밀번호가 없습니다.
-- [ ] `.venv`를 Git에 올리지 않습니다.
+- [ o ] `.env`는 Git 추적 대상이 아닙니다.
+- [ o ] 실제 API Key를 코드에 작성하지 않았습니다.
+- [ o ] 캡처 화면에 Token/비밀번호가 없습니다.
+- [ o ] `.venv`를 Git에 올리지 않습니다.
 
 ### Evidence
 
@@ -233,42 +251,47 @@ customers.shape:
 ### 나의 해석과 판단
 
 환경 파일과 비밀정보를 분리해야 하는 이유를 작성하세요.
+- 보안 침해 방지와 운영의 유연성 확보를 위함 
 
 ---
 
 ## 7. Chapter 02 최종 회고
 
 ### 가장 중요했다고 생각한 환경 설정 1가지
+- .venv 가상환경 설정 
 
 ```text
-작성하세요.
+이전부터 분석활동을 진행하면서 python에서 library 설치 시.
+특히 tensorflow, tensor 등 딥러닝 관련 라이브러리의 버전이 꼬여서 애로사항이 많았음
+
+
 ```
 
 ### 그 이유
 
 ```text
-작성하세요.
+이번 기회를 통해 가상환경 구축의 중요성에 대해서 다시 한번 인지하였음 
 ```
 
 ### 다음 Chapter에서 재사용할 환경 체크 3가지
 
-1.
-2.
-3.
+1. .venv
+2. 폴더 확인 
+3. 데이터 업로드 확인 
 
 ### 현재 환경의 한계 또는 주의점
 
 ```text
-작성하세요.
+앞으로도 재활용을 위해 해당 경로를 활용하겠습니다. 
 ```
 
 ---
 
 ## 최종 제출 체크
 
-- [ ] 핵심 Evidence 4~7장을 첨부했습니다.
-- [ ] 단순 캡처가 아니라 관찰과 판단을 작성했습니다.
-- [ ] Secret/개인정보가 없습니다.
-- [ ] GitHub에서 이미지가 정상 표시됩니다.
-- [ ] 개인 저장소에 `chapter02/chapter02.md`를 업로드했습니다.
-- [ ] 저장소 URL이 아니라 최종 파일 URL을 제출합니다.
+- [ o ] 핵심 Evidence 4~7장을 첨부했습니다.
+- [ o ] 단순 캡처가 아니라 관찰과 판단을 작성했습니다.
+- [ o ] Secret/개인정보가 없습니다.
+- [ o ] GitHub에서 이미지가 정상 표시됩니다.
+- [ o ] 개인 저장소에 `chapter02/chapter02.md`를 업로드했습니다.
+- [ p ] 저장소 URL이 아니라 최종 파일 URL을 제출합니다.
