@@ -3,16 +3,26 @@
 > 주 제출물은 실행 완료 Notebook `chapter03/chapter03.ipynb`입니다. 이 양식의 항목을 Notebook의 Markdown 셀로 추가해 작성합니다.
 
 ## 0. 제출 정보
-- 이름:
-- GitHub ID:
-- 작성일:
-- 최종 제출 URL:
+- 이름: 조유라
+- GitHub ID: joyula3-jpg
+- 작성일:9월 20일(일)
+- 최종 제출 URL: https://github.com/joyula3-jpg/llm-data-analysis-study_rev2/edit/main/chapter03_assignment.md
 
 ## 1. 데이터 로딩과 구조 확인
 ### 실행/결과
-- 4개 CSV 로딩 여부:
+- 4개 CSV 로딩 여부: 완료되었습니다. 
 - 각 데이터 shape:
+  : customers - 150행, 6열
+  : order - 300행, 6열
+  : order_items - 764행, 5열
+  : products - 100행, 4열
+
 - 주요 컬럼:
+  : customers - customer_id, signup_date, name, gender 
+  : order - 150행, 6열
+  : order_items - 764행, 5열
+  : products - 100행, 4열
+  
 - dtypes에서 주목한 컬럼:
 
 ### Evidence
