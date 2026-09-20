@@ -94,10 +94,6 @@ order_items --product_id--> products
 
 <img width="669" height="290" alt="스크린샷 2026-09-20 오후 2 22 37" src="https://github.com/user-attachments/assets/0fce9068-7e4c-4171-8cec-b1186b36bcf3" />
 
-<img width="1103" height="901" alt="스크린샷 2026-09-12 오후 10 38 49" src="https://github.com/user-attachments/assets/d9bb0b00-d498-4c30-8ffe-f9a879f9e0f5" />
-
-
-
 
 ### 결과 관찰
 - 네 특이사항 없이 확인하였습니다. 
