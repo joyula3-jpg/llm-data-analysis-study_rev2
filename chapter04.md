@@ -32,32 +32,43 @@
   merge한 데이터를 활용할 필요성이 필요함 
 
 ## 2. 필터링·정렬·파생 컬럼
-- 적용한 필터 조건: 
-- 정렬 기준:
-- 만든 파생 컬럼:
-- `line_total` 계산식:
+- 적용한 필터 조건: customers의 city 컬럼을 활용하여 각 범주별 내림차순을 진행하였습니다. 
+- 정렬 기준: 도시별 conut 개수를 기준으로 내림차순을 진행하였습니다. 
+- 만든 파생 컬럼: big_city_only
+- `line_total` 계산식: order_items['line_total'] = order_items['quantity'] * order_items['unit_price']
 
 ![필터와 파생 컬럼](images/step02_transform.png)
+<img width="755" height="306" alt="스크린샷 2026-09-25 오후 8 55 49" src="https://github.com/user-attachments/assets/803a4d2e-7065-47c3-97f2-b197ace8accc" />
+
+<img width="686" height="359" alt="스크린샷 2026-09-25 오후 8 58 04" src="https://github.com/user-attachments/assets/21ede659-cf1f-4c3c-99f7-c7778b0f981d" />
+
 
 ### 결과 관찰
+- 조건, 필터를 걸어서 파생변수를 만들었습니다.
+- 본인이 보고 싶은 city만 추가하여 데이터를 만들었습니다.
+- 제품별 quantity와 unit price를 곱하여 line_total 컬럼을 만들었습니다. 
 
 ### 나의 해석과 판단
-필터 기준이 달라지면 결과가 어떻게 달라질지 작성하세요.
+- customers의 city에서 필터를 변경하면 그 필터에 맞는 고객만 선별될 수 있고 거기에 따라 데이터의 특성 그리고 길이가 달라질 수 있습니다. 즉 데이터의 특성 자체가 바뀝니다. 
 
 ### 업무·분석적 의미
+- 1. 범위를 확장할 수 있다. 2. 새롭게 내가 원하는 컬럼을 만들어서 분석의 범위를 확장할 수 있다. (재정의 할 수 있다.)
 
 ### 한계와 추가 확인 사항
+- 없습니다. 
 
 ## 3. merge 검증
-- 병합한 데이터:
-- 사용한 key:
-- `validate` 결과:
-- `indicator` 결과:
-- 병합 전/후 행 수:
+- 병합한 데이터: orders, order_items
+- 사용한 key: order_id
+- `validate` 결과: merge가 올바르게 되었습니다. many_to_one
+- `indicator` 결과: merge가 올바르게 되었습니다. True
+- 병합 전/후 행 수: 병합 전 - 300, 병합 후 - 764
 
 ![merge 검증](images/step03_merge.png)
+<img width="628" height="495" alt="스크린샷 2026-09-25 오후 9 10 11" src="https://github.com/user-attachments/assets/249b3dc5-a87f-4213-a52e-2635e31358e5" />
 
 ### 결과 관찰
+- key값으로 merge를 통해 다양한 데이터를 결합하여 데이터 분석이 가능함을 확인하였습니다. 
 
 ### 나의 해석과 판단
 이번 병합이 안전하다고 판단한 근거를 작성하세요. 행 수가 증가/감소했다면 이유를 설명하세요.
