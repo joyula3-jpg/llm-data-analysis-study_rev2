@@ -177,12 +177,7 @@ unit_price는 products.price와 764건 전부 일치한다.
 넷째, 파생 컬럼은 전처리 결과 위에 계산되므로 전처리가 틀리면 함께 틀린다. line_total은 quantity와 unit_price 변환이 모두 성공했다는 전제 위에 있다. to_number가 한 건이라도 NaN을 만들면 line_total도 NaN이 되고, 합계에서 조용히 빠진다. 그래서 총합 대조를 파생 컬럼 생성 후에 다시 해야 한다.
 
 ## 5. 전처리 전/후 비교
-| 항목 | 처리 전 | 처리 후 | 변화 이유 |
-| --- | ---: | ---: | --- |
-| 행 수 | | | |
-| 결측 | | | |
-| 중복 | | | |
-| 변환 실패 | | | |
+
 <img width="692" height="668" alt="image" src="https://github.com/user-attachments/assets/041e019c-5ad6-4deb-8f57-bf87f5b34fcf" />
 <img width="751" height="281" alt="image" src="https://github.com/user-attachments/assets/7e90a3b8-b236-4f7c-8549-681180e86cbf" />
 
