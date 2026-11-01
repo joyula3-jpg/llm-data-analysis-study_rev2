@@ -316,28 +316,68 @@ gender, age, city 를 추가로 뺀 근거
 
 ## 8. 최종 Validation
 `reports/ch08_project_validation.csv`의 결과를 요약합니다.
+<img width="746" height="605" alt="image" src="https://github.com/user-attachments/assets/aa973e05-47e3-467c-be0c-e2cbcc877f0a" />
+<img width="750" height="435" alt="image" src="https://github.com/user-attachments/assets/d4101c37-c1a5-401c-bef2-7f5ce52bc326" />
+
 
 | 검증 항목 | 결과 | 내가 확인한 근거 |
-| --- | --- | --- |
-| pk_integrity |  |  |
-| fk_integrity |  |  |
-| merge_checks_pass |  |  |
-| line_total_consistency |  |  |
-| completed_total_consistency |  |  |
-| category_sales_ratio_pct_sum |  |  |
-| completed_rows_with_invalid_order_date |  |  |
-| public_customer_columns_safe |  |  |
+<img width="745" height="392" alt="image" src="https://github.com/user-attachments/assets/c70aaa21-2f93-47a4-a353-66cf6ff59f38" />
 
 ### FAIL이 있었다면 수정 내용
+이번 실행에서는 FAIL이 없었다. 다만 항목별로 FAIL이 났을 때의 원인과 조치를 정리해 둔다. 어느 Gate가 깨졌는지에 따라 손댈 곳이 달라진다.
+pk_integrity FAIL
+PK에 결측이 있으면 해당 행을 삭제한다. 식별 불가능한 레코드는 어떤 집계에도 쓸 수 없다. 중복이면 두 가지를 구분해야 한다. 완전 동일 행이면 drop_duplicates() 로 제거하고, PK만 같고 나머지 값이 다르면 임의로 지우지 않고 원 시스템에 어느 쪽이 맞는지 확인한다.
+fk_integrity FAIL
+부모에 없는 참조 ID가 있다는 뜻이다. 해당 행을 제거하면 금액이 줄어드는데, 그 금액을 기록해 두고 보고서에 명시한다. 제거 없이 진행하면 how="left" 조인에서 NaN이 생기고 집계에서 조용히 빠지므로, 어느 쪽이든 영향 금액을 먼저 계산한다.
+merge_checks_pass FAIL
+rows_after > rows_before 면 오른쪽 테이블 키에 중복이 있다. products.product_id 나 orders.order_id 의 중복을 먼저 제거해야 한다. unmatched_rows > 0 이면 FK 문제이므로 위 항목으로 돌아간다. validate 를 빼서 통과시키는 것은 해결이 아니다.
+line_total_consistency FAIL
+to_number() 변환에서 NaN이 생겼을 가능성이 가장 크다. quantity 나 unit_price 의 원본 값을 직접 보고, 단위 기호나 쉼표 외에 예상치 못한 문자가 있는지 확인한다. line_total <= 0 이 나오면 반품이나 조정 거래일 수 있으므로 업무 담당자에게 의미를 확인한 뒤 처리 방침을 정한다.
 
 ## 9. LLM 활용 기록
-- 사용 여부:
+- 사용 여부: 사용함, claude를 환경 구성, 모듈 구현, 결과 해석 검토에 활용하였음 
 - 사용 목적:
+<img width="518" height="66" alt="image" src="https://github.com/user-attachments/assets/b9d9d802-4fa5-4fa2-ac01-e36f515f1efb" />
+
 - Safe Context:
+4개 테이블 구조
+- customers (150, 6): customer_id, name, gender, age, city, signup_date
+- products (100, 4): product_id, product_name, category, price
+- orders (300, 5): order_id, customer_id, order_date, payment_method, order_status
+- order_items (764, 5): order_item_id, order_id, product_id, quantity, unit_price
+
+- order_status: completed 184 / cancelled 64 / refunded 52
+- category 7종, payment_method 4종
+- 기간 2025-07-09 ~ 2026-07-08
+- 결측 0, PK 중복 0, FK 미매칭 0
+- 금액 컬럼 없음. quantity x unit_price 로 계산 필요
+- unit_price 가 products.price 와 764건 전부 일치 (할인 미반영)
+  
 - Prompt 요약:
+공개 산출물에서 제거해야 할 컬럼 목록과 익명 라벨 방식 제안 요청
+작성한 해석에서 데이터로 뒷받침되지 않는 표현 지적 요청
+조건: 제시하지 않은 컬럼은 사용하지 말 것, 데이터에 없는 원인은 추정하지 말 것
+
 - 제안 요약:
+<img width="747" height="366" alt="image" src="https://github.com/user-attachments/assets/3519682b-09a0-4442-97f5-105ade931c09" />
+
 - 반영/수정/보류:
+채택 (1, 2, 3, 4, 6)
+총합 대조 Gate가 가장 값이 있었다. 행 증식이나 누락은 에러 없이 일어나는데, 이 검사가 유일하게 잡아낸다. validate 와 indicator 를 함께 쓴 것도 같은 맥락이다. 조용한 실패를 예외로 바꾼다.
+저장 파일 재검사는 생각 못 했던 각도였다. DataFrame에서 컬럼을 뺐어도 실제 유출되는 것은 파일이다.
+
+수정 후 채택 (5)
+익명 라벨 제안은 받아들였으나 범위를 넓혔다. LLM은 customer_id 만 제거하라고 했는데, gender, age, city 도 함께 뺐다. 완료 구매 고객이 100명뿐이라 세 값의 조합이 상위 고객 소수와 결합하면 재식별이 가능하다고 판단했다. 직접 식별자가 아니어도 조합으로 특정되면 결과는 같다.
+
+보류 후 폐기 (7)
+orders.total_amount 를 쓰는 집계 코드를 제안받았다. 실제 컬럼 목록을 확인하니 그런 컬럼이 없었다. LLM이 일반적인 주문 테이블에 있을 법한 컬럼을 추측한 것이다. quantity × unit_price 로 직접 계산하도록 바꿨다.
+
+보류 (8)
+signup_date 와 첫 주문일의 차이를 계산하라는 제안이었다. 컬럼은 존재하므로 코드는 정상 실행된다. 그러나 주문일이 가입일보다 앞선 행이 56건(전체 주문의 18.7%) 있어 음수 일수가 섞인다. 이번 프로젝트 범위에서 제외했다.
+
 - 사람이 검증한 근거:
+<img width="752" height="420" alt="image" src="https://github.com/user-attachments/assets/025315c2-30d3-4f53-879f-5bc3ecc91224" />
+
 
 ## 10. 프로젝트 재현 확인
 - `python scripts/run_midterm_project.py` 실행 여부:
